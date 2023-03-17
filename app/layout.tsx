@@ -1,6 +1,8 @@
 'use client'
-import { GlobalProvider, useGlobalContext } from '@/context/store'
+import { GlobalProvider } from '@/context/store'
 import './globals.css'
+import React from 'react'
+import { Providers } from '@/context/themeProvider'
 
 export default function RootLayout({
    children,
@@ -8,17 +10,12 @@ export default function RootLayout({
    children: React.ReactNode
 }) {
    return (
-      <GlobalProvider>
-         <Body>{children}</Body>
-      </GlobalProvider>
-   )
-}
-
-const Body = ({ children }: { children: React.ReactNode }) => {
-   const { theme } = useGlobalContext()
-   return (
-      <html lang="en" data-theme={theme}>
-         <body>{children}</body>
+      <html lang="en" suppressHydrationWarning>
+         <body>
+            <Providers>
+               <GlobalProvider>{children}</GlobalProvider>
+            </Providers>
+         </body>
       </html>
    )
 }
