@@ -6,53 +6,24 @@ type Props = {
 }
 
 interface contextProps {
-   theme: string
-   setTheme: (theme: string) => void
-   AllTheme: string[]
+   value: string
+   setValue: React.Dispatch<React.SetStateAction<string>>
 }
 
 const GlobalContext = React.createContext<contextProps>({
-   theme: 'light',
-   setTheme: () => {},
-   AllTheme: [],
+   value: '',
+   setValue: () => {},
 })
 
 export const GlobalProvider = ({ children }: Props) => {
-   const [theme, setTheme] = React.useState('light')
-   const AllTheme = [
-      'light',
-      'dark',
-      'cupcake',
-      'bumblebee',
-      'emerald',
-      'corporate',
-      'synthwave',
-      'retro',
-      'cyberpunk',
-      'valentine',
-      'halloween',
-      'garden',
-      'forest',
-      'aqua',
-      'lofi',
-      'pastel',
-      'fantasy',
-      'wireframe',
-      'black',
-      'luxury',
-      'dracula',
-      'cmyk',
-      'autumn',
-      'business',
-      'acid',
-      'lemonade',
-      'night',
-      'coffee',
-      'winter',
-   ]
-
+   const [value, setValue] = React.useState('')
    return (
-      <GlobalContext.Provider value={{ theme, setTheme, AllTheme }}>
+      <GlobalContext.Provider
+         value={{
+            value,
+            setValue,
+         }}
+      >
          {children}
       </GlobalContext.Provider>
    )
